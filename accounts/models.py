@@ -1,12 +1,10 @@
-from django.contrib.auth.models import AbstractUser, BaseUserManager, Group, Permission
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-
 from branches.models import GymBranch
 
 
 class UserManager(BaseUserManager):
-
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError(_("The Email field must be set"))
@@ -31,7 +29,7 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class User(AbstractUser):
+class User(AbstractBaseUser, PermissionsMixin):
 
     ROLE_ADMIN = 'admin'
     ROLE_MANAGER = 'manager'
@@ -48,16 +46,17 @@ class User(AbstractUser):
     email = models.EmailField(
         _('email address'),
         unique=True,
-        error_messages={
-            'unique': _("A user with that email already exists."),
-        },
+        max_length=255,
+        error_messages={'unique': _("A user with that email already exists.")},
     )
+
+    first_name = models.CharField(_('first name'), max_length=150, blank=True)
+    last_name = models.CharField(_('last name'), max_length=150, blank=True)
 
     role = models.CharField(
         max_length=20,
         choices=ROLE_CHOICES,
         default=ROLE_MEMBER,
-        help_text="Determines the user's permissions and access level."
     )
 
     branch = models.ForeignKey(
@@ -66,43 +65,34 @@ class User(AbstractUser):
         null=True,
         blank=True,
         related_name='users',
-        verbose_name="Gym Branch",
-        help_text="The gym branch this user belongs to. Leave empty for Super Admin."
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    groups = models.ManyToManyField(
-        Group,
-        related_name='custom_user_set',           
-        blank=True,
-        help_text='The groups this user belongs to.',
-        related_query_name='custom_user',
+    is_active = models.BooleanField(
+        _('active'),
+        default=True,
+        help_text=_('Designates whether this user should be treated as active.'),
     )
 
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name='custom_user_permissions_set', 
-        blank=True,
-        help_text='Specific permissions for this user.',
-        related_query_name='custom_user',
+    is_staff = models.BooleanField(
+        _('staff status'),
+        default=False,
+        help_text=_('Designates whether the user can log into this admin site.'),
     )
+
+    date_joined = models.DateTimeField(_('date joined'), auto_now_add=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']
+
     objects = UserManager()
 
     class Meta:
         verbose_name = "User"
         verbose_name_plural = "Users"
-        ordering = ['-created_at']
-        indexes = [
-            models.Index(fields=['email']),
-            models.Index(fields=['role']),
-        ]
+        ordering = ['-date_joined']
 
     def __str__(self):
-        role_display = self.get_role_display() or self.role
-        return f"{self.email} ({role_display})"
+        return f"{self.email} ({self.get_role_display() or self.role})"
 
     @property
     def is_super_admin(self):
@@ -120,9 +110,8 @@ class User(AbstractUser):
     def is_member(self):
         return self.role == self.ROLE_MEMBER
 
-    def clean(self):
-        super().clean()
-        if self.role == self.ROLE_ADMIN and self.branch is not None:
-            raise ValidationError(_("Super Admin should not be assigned to any branch."))
-        if self.role != self.ROLE_ADMIN and self.branch is None:
-            raise ValidationError(_("Non-admin users must be assigned to a branch."))
+    def get_full_name(self):
+        return f"{self.first_name} {self.last_name}".strip()
+
+    def get_short_name(self):
+        return self.first_name
