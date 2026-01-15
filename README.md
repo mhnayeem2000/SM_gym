@@ -67,7 +67,7 @@ No frontend is included — only API endpoints.
 7. Important URLs:
 
    1.  Login: /api/auth/token/
-   2.  Swagger Docs: /api/schema/swagger-ui/
+   2.  Swagger Docs: /api/schema/swagger-ui/ ([Swagger](http://127.0.0.1:8000/api/schema/swagger-ui/))
 
 8. User Role and Permissions : 
 
