@@ -1,0 +1,50 @@
+# 🏋️ Gym Management & Member Workout System (API Only)
+
+This project is a **backend REST API** for managing multiple gym branches, trainers, members, workout plans, and assigned workout tasks.
+
+Built using **Django, Django REST Framework, and JWT authentication**.  
+🚫 Frontend is NOT included (API-only project).
+
+---
+
+## 🚀 Features
+
+- Role-based access control:
+  - Super Admin
+  - Gym Manager
+  - Trainer
+  - Member
+- JWT Authentication (Access & Refresh tokens)
+- Branch-based data isolation
+- Trainers can create workout plans
+- Trainers can assign workout tasks to members
+- Members can view and update their own task status
+- Secure permission enforcement at API level
+
+---
+
+## 🛠️ Technologies Used
+
+- Python 3.11 / 3.12
+- Django 5.1+
+- Django REST Framework
+- djangorestframework-simplejwt (JWT)
+- PostgreSQL (Production)
+- SQLite (Development)
+
+---
+
+## ⚙️ Project Setup (Local Development)
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/gym-management-api.git
+cd gym-management-api
+
+### 2. Create & Activate Virtual Environment
+
+``` python -m venv venv
+Windows
+``` venv\Scripts\activate
+Linux / Mac
+``` source venv/bin/activate

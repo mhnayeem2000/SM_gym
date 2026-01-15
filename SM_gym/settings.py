@@ -49,6 +49,10 @@ INSTALLED_APPS = [
     'branches',
     'workouts',
     'api',
+
+
+    'drf_spectacular',            
+    'drf_spectacular_sidecar',
 ]
 
 MIDDLEWARE = [
@@ -105,6 +109,7 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 SIMPLE_JWT = {
@@ -133,6 +138,27 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Gym Management & Member Workout System API',
+    'DESCRIPTION': 'Internal API for managing gym branches, trainers, members, workout plans & tasks.\nJWT authentication + role-based access.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': True,               
+    'SCHEMA_PATH_PREFIX': '/api/',         
+    
+    'SWAGGER_UI_SETTINGS': {
+        'deepLinking': True,
+        'persistAuthorization': True,
+        'displayOperationId': True,
+    },
+    
+    'SWAGGER_UI_DIST': 'SIDECAR',
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+    'REDOC_DIST': 'SIDECAR',
+    
+    'SECURITY': [{'BearerAuth': []}],
+    'COMPONENT_NO_READ_ONLY_REQUIRED': True,
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
