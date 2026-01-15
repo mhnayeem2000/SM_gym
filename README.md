@@ -98,21 +98,13 @@ No frontend is included — only API endpoints.
 
 
 10. 📬 How to Use the Postman Collection
+        Download json file from Postman File in the Root directory 
 
-    1.Go to /postman/ folder in this repository
+11. Test User : 
 
-    2.Download:
-
-        Gym_Management_API.postman_collection.json
-
-    Open Postman ->
-    Click Import ->
-    Upload both JSON files ->
-    Select environment: Gym API - Dev ->
-    First run: ->
-    Go to Auth → Login ->
-    Update email & password ->
-    Send request ->
-    Tokens will auto-save automatically
-
-    Tip: Re-run login when token expires.
+| Role        | Email                                               | Password | Branch   |
+| ----------- | --------------------------------------------------- | -------- | -------- |
+| Super Admin | [admin@gmail.com](mailto:admin@gmail.com)               | admin | —        |
+| Manager     | [manager@gmail.com](mailto:manager1@gmail.com) | manager12345678   | Branch 1 |
+| Trainer     | [trainer@gmail.com](mailto:trainer1@gmail.com) | trainer12345678    | Branch 1 |
+| Member      | [member@gmail.com](mailto:member1@gmail.com)   | member12345678   | Branch 1 |
