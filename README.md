@@ -43,3 +43,22 @@ No frontend is included — only API endpoints.
 
         # Linux / macOS
         source venv/bin/activate
+3. Install dependencies
+
+    ```bash
+        pip install -r requirements.txt
+4. Create .env file in root
+    ```bash
+    SECRET_KEY=your-very-long-random-secret-key-change-this
+    DEBUG=True
+    ALLOWED_HOSTS=localhost,127.0.0.1
+5. Run migrations
+
+    ```bash
+        python manage.py makemigrations
+        python manage.py migrate    
+
+6. Start the development server
+
+    ```bash
+    python manage.py runserver
