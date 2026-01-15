@@ -105,14 +105,14 @@ No frontend is included — only API endpoints.
 
         Gym_Management_API.postman_collection.json
 
-    3.Open Postman
-    4.Click Import
-    5.Upload both JSON files
-    6.Select environment: Gym API - Dev
-    7.First run:
-    8.Go to Auth → Login
-    9.Update email & password
-    10. Send request
-    11. Tokens will auto-save automatically
+    Open Postman ->
+    Click Import ->
+    Upload both JSON files ->
+    Select environment: Gym API - Dev ->
+    First run: ->
+    Go to Auth → Login ->
+    Update email & password ->
+    Send request ->
+    Tokens will auto-save automatically
 
     Tip: Re-run login when token expires.
