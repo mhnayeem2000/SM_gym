@@ -98,7 +98,7 @@ No frontend is included — only API endpoints.
 
 
 10. 📬 How to Use the Postman Collection
-        Download json file from Postman File in the Root directory 
+        Download ([Here](https://github.com/mhnayeem2000/SM_gym/tree/main/Postman%20File)) json file from Postman File in the Root directory 
 
 11. Test User : 
 
