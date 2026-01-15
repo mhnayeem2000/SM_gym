@@ -19,8 +19,8 @@ No frontend is included — only API endpoints.
 
 ## Technologies
 
-- Python 3.11 / 3.12
-- Django 5.1+
+- Python 3.11 
+- Django 5.1
 - Django REST Framework
 - djangorestframework-simplejwt (JWT)
 - PostgreSQL (production) / SQLite (development)
@@ -51,7 +51,7 @@ No frontend is included — only API endpoints.
     ```bash
     SECRET_KEY=your-very-long-random-secret-key-change-this
     DEBUG=True
-    ALLOWED_HOSTS=localhost,127.0.0.1
+    ALLOWED_HOSTS=localhost,127.0.0.1 , https://sm-gym.onrender.com/
 5. Run migrations
 
     ```bash
@@ -64,10 +64,10 @@ No frontend is included — only API endpoints.
     python manage.py runserver
 
 
-7. Important URLs:
-
+7. Important URLs: [Live](https://sm-gym.onrender.com/)
+   0. Live Link : https://sm-gym.onrender.com/
    1.  Login: /api/auth/token/
-   2.  Swagger Docs: /api/schema/swagger-ui/ ([Swagger](http://127.0.0.1:8000/api/schema/swagger-ui/))
+   2.  Swagger Docs: /api/schema/swagger-ui/ ([Swagger](https://sm-gym.onrender.com/api/schema/swagger-ui/))
 
 8. User Role and Permissions : 
 
