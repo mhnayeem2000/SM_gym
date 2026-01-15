@@ -62,3 +62,57 @@ No frontend is included — only API endpoints.
 
     ```bash
     python manage.py runserver
+
+
+7. Important URLs:
+
+   1.  Login: /api/auth/token/
+   2.  Swagger Docs: /api/schema/swagger-ui/
+
+8. User Role and Permissions : 
+
+| Role        | Can Do                                              | Cannot Do                      |
+| ----------- | --------------------------------------------------- | ------------------------------ |
+| Super Admin | Full access, create branches & users, view all data | —                              |
+| Gym Manager | Create trainers & members (own branch), list users  | Access other branches          |
+| Trainer     | Create workout plans, assign tasks (own branch)     | Assign tasks to other branches |
+| Member      | View own tasks, update task status                  | View other users or plans      |
+
+
+9. API Endpoints: 
+
+| Method | Endpoint                    | Description         | Access                  |
+| ------ | --------------------------- | ------------------- | ----------------------- |
+| POST   | `/api/auth/token/`          | Login (JWT tokens)  | Everyone                |
+| POST   | `/api/auth/token/refresh/`  | Refresh token       | Everyone                |
+| GET    | `/api/accounts/users/me/`   | Get own profile     | Logged-in user          |
+| GET    | `/api/accounts/users/`      | List users          | Super Admin, Manager    |
+| POST   | `/api/accounts/users/`      | Create user         | Super Admin, Manager    |
+| GET    | `/api/branches/branches/`   | List branches       | Logged-in users         |
+| POST   | `/api/branches/branches/`   | Create branch       | Super Admin             |
+| GET    | `/api/workouts/plans/`      | List workout plans  | Admin, Manager, Trainer |
+| POST   | `/api/workouts/plans/`      | Create workout plan | Trainer                 |
+| GET    | `/api/workouts/tasks/`      | List tasks          | All users               |
+| POST   | `/api/workouts/tasks/`      | Assign task         | Trainer                 |
+| PATCH  | `/api/workouts/tasks/{id}/` | Update task         | Trainer / Member        |
+
+
+10. 📬 How to Use the Postman Collection
+
+    1.Go to /postman/ folder in this repository
+
+    2.Download:
+
+        Gym_Management_API.postman_collection.json
+
+    3.Open Postman
+    4.Click Import
+    5.Upload both JSON files
+    6.Select environment: Gym API - Dev
+    7.First run:
+    8.Go to Auth → Login
+    9.Update email & password
+    10. Send request
+    11. Tokens will auto-save automatically
+
+    Tip: Re-run login when token expires.
